@@ -1,20 +1,22 @@
 #pragma once
 #include "Node.h"
-template <typename T1>
+template <typename T>
 
 class List
 {
 public:
-	Node<T1>* head;
-	Node<T1>* tail;
+	Node<T>* head;
+	Node<T>* tail;
 	int all;
 	void addBegin();
 	void addEnd();
 	void showAll();
 	void deleteBegin();
 	void deleteEnd();
-	T1 findNodeNr(int i);//dzia³a poprawnie
-	void newValueNr(int i, T1 newData);
+	T findNodeNr(int i);//dzia³a poprawnie
+	void newValueNr(int i, T newData);
+	Node<T>* findNodeWithData(T _value);
+	bool deleteNodeWithData(T _value);
 	List() {
 		this->head = nullptr;
 		this->tail = nullptr;

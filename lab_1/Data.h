@@ -2,19 +2,22 @@
 #include<iostream>
 #include<type_traits>
 
-template <typename T1>
+template <typename T>
 class Data
 {
 public:
-    T1 value;
+    T value;
     Data() {
-        if (std::is_arithmetic<T1>::value)
+        if (std::is_arithmetic<T>::value)
         {
-            this->value = static_cast<T1>(rand());
+            this->value = static_cast<T>(rand());
         }
         else {
             char randomChar = 'a' + (rand() % 26);
-            this->value = static_cast<T1>(randomChar);
+            this->value = static_cast<T>(randomChar);
         }
     };
+    bool operator==(const Data<T>& other) const {
+        return value == other.value;
+    }
 };

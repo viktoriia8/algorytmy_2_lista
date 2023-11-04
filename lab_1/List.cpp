@@ -1,15 +1,60 @@
 #include "List.h"
 
 #include <iostream>
+template<typename T>
+bool List<T>::deleteNodeWithData(T _value) {
+	Node<T>* myNode = findNodeWithData(_value);
+	if (myNode) {
+		if (!myNode->prev) {
+			deleteBegin();
+			return true;
+		}
+		else if (!myNode->next) {
+			deleteEnd();
+			return true;
+		}
+		else {
+			Node<T>* myNewNode = myNode;
+			myNewNode->next->prev = myNode->prev;
+			myNewNode->prev->next = myNode->next;
+			delete myNode;
+			delete myNewNode;
+			return true;
+		}
+	}
+	else {
+		return false;
+	}
+}
 
-template<typename T1>
+template<typename T>
+Node<T>* List<T>::findNodeWithData(T _value){
+	if (all == 0) {
+		cout << "Lista jest pusta\n";
+		return 0;
+	}
+	Node<T>* myHead = head;
+	for (int j = 0; j < all; j++) {
 
-void List<T1>::newValueNr(int i, T1 newData) {
+		if (_value==myHead->data->value)
+		{
+			return myHead;
+		}
+		myHead = myHead->next;
+	}
+	cout << "Element o podanej wartoœci nie istnieje.\n";
+	return NULL;
+
+}
+
+template<typename T>
+
+void List<T>::newValueNr(int i, T newData) {
 	if (all == 0) {
 		cout << "Lista jest pusta\n";
 		exit;
 	}
-	Node<T1>* myHead = head;
+	Node<T>* myHead = head;
 	for (int j = 0; j < all; j++) {
 		if (j == i)
 		{
@@ -20,13 +65,13 @@ void List<T1>::newValueNr(int i, T1 newData) {
 	cout << "Element jest poza zakresem.\n";
 	exit;
 }
-template<typename T1>
-T1 List<T1>::findNodeNr(int i) {
+template<typename T>
+T List<T>::findNodeNr(int i) {
 	if (all == 0) {
 		cout << "Lista jest pusta\n";
 		return 0;
 	}
-	Node<T1>* myHead = head;
+	Node<T>* myHead = head;
 	for (int j = 0; j<all; j++) {
 		if(j==i) 
 		{ 
@@ -39,43 +84,43 @@ T1 List<T1>::findNodeNr(int i) {
 }
 
 
-template<typename T1>
-void List<T1>::deleteBegin() {
+template<typename T>
+void List<T>::deleteBegin() {
 	if (all == 0) {
 		cout << "Lista jest pusta.\n";
 	}
 	else {
-		Node* myHead = head->next;
+		Node<T>* myHead = head->next;
 		delete head;
 		head = myHead;
 		head->prev = nullptr;
 	}
 }
-template<typename T1>
-void List<T1>::deleteEnd(){
+template<typename T>
+void List<T>::deleteEnd(){
 	if (all == 0) {
 		cout << "Lista jest pusta.\n";
 	}
 	else {
-		Node<T1>* myTail = tail->prev;
+		Node<T>* myTail = tail->prev;
 		delete tail;
 		tail = myTail;
 		tail->next = nullptr;
 	}
 }
-template<typename T1>
-void List<T1>::showAll() {
-	Node<T1>* myHead = head;
+template<typename T>
+void List<T>::showAll() {
+	Node<T>* myHead = head;
 	while (myHead != nullptr) {
 		std::cout<< myHead->data->value << endl;
 		myHead = myHead->next;
 	}
 	cout << "-------------------\n";
 }
-template<typename T1>
-void List<T1>::addBegin() 
+template<typename T>
+void List<T>::addBegin() 
 {
-	Node<T1>* newNode = new Node<T1>();
+	Node<T>* newNode = new Node<T>();
 	newNode->next = head;
 
 	if (all == 0) {
@@ -88,9 +133,9 @@ void List<T1>::addBegin()
 	newNode = nullptr;
 	all++;
 }
-template<typename T1>
-void List<T1>::addEnd() {
-	Node<T1>* newNode = new Node<T1>();
+template<typename T>
+void List<T>::addEnd() {
+	Node<T>* newNode = new Node<T>();
 	newNode->prev = head;
 
 	if (all == 0) {

@@ -4,7 +4,6 @@
 #include<vector>
 #include <string>
 #include "List.cpp"
-#include "Node.h"
 
 using namespace std;
 
@@ -19,12 +18,13 @@ int main()
     
     myList->addEnd();
     myList->showAll();
-    int a = 14;
+    int a = 2;
     int m = myList->findNodeNr(a);
     if (m) {
         cout << "Element nr " << a << " to: " << m << endl;
     }
-    myList->newValueNr(a, 2); 
+    myList->newValueNr(a, 2);
+   // myList->deleteNodeWithData(2);
     myList->showAll();
     int f = myList->findNodeNr(a);
     cout << "Element nr " << a << " to: " << f << endl;

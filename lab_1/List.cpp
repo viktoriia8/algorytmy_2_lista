@@ -1,6 +1,12 @@
 #include "List.h"
-
 #include <iostream>
+template<typename T>
+void List<T>::deleteList() {
+	while (all) {
+		deleteBegin();
+    }
+}
+
 template<typename T>
 bool List<T>::deleteNodeWithData(T _value) {
 	Node<T>* myNode = findNodeWithData(_value);
@@ -14,11 +20,9 @@ bool List<T>::deleteNodeWithData(T _value) {
 			return true;
 		}
 		else {
-			Node<T>* myNewNode = myNode;
-			myNewNode->next->prev = myNode->prev;
-			myNewNode->prev->next = myNode->next;
+			myNode->next->prev = myNode->prev;
+			myNode->prev->next = myNode->next;
 			delete myNode;
-			delete myNewNode;
 			return true;
 		}
 	}
@@ -48,7 +52,6 @@ Node<T>* List<T>::findNodeWithData(T _value){
 }
 
 template<typename T>
-
 void List<T>::newValueNr(int i, T newData) {
 	if (all == 0) {
 		cout << "Lista jest pusta\n";
@@ -91,9 +94,11 @@ void List<T>::deleteBegin() {
 	}
 	else {
 		Node<T>* myHead = head->next;
+		all--;
 		delete head;
 		head = myHead;
-		head->prev = nullptr;
+		if(head)
+			head->prev = nullptr;
 	}
 }
 template<typename T>
@@ -106,6 +111,7 @@ void List<T>::deleteEnd(){
 		delete tail;
 		tail = myTail;
 		tail->next = nullptr;
+		all--;
 	}
 }
 template<typename T>

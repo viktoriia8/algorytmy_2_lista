@@ -24,10 +24,12 @@ int main()
         cout << "Element nr " << a << " to: " << m << endl;
     }
     myList->newValueNr(a, 2);
-   // myList->deleteNodeWithData(2);
+    myList->showAll();
+    myList->deleteNodeWithData(2);
     myList->showAll();
     int f = myList->findNodeNr(a);
     cout << "Element nr " << a << " to: " << f << endl;
-    
+    myList->deleteList();
+    myList->showAll();
     //myList->showAll();
 }

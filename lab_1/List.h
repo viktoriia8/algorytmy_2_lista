@@ -17,6 +17,7 @@ public:
 	void newValueNr(int i, T newData);
 	Node<T>* findNodeWithData(T _value);
 	bool deleteNodeWithData(T _value);
+	void deleteList();
 	List() {
 		this->head = nullptr;
 		this->tail = nullptr;
